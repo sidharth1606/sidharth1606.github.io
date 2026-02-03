@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidharth Ganapathi - Data Analyst Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ff88;
+            --secondary: #0066ff;
+            --accent: #ff0066;
+            --dark: #0a0e27;
+            --darker: #050814;
+            --text: #e8e8f0;
+            --text-dim: #8a8a9e;
+            --grid: rgba(0, 255, 136, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        .gradient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 102, 255, 0.15), transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 0, 102, 0.1), transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(0, 255, 136, 0.08), transparent 50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-text .subtitle {
+            font-size: 2rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--dark);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 3rem;
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease 0.8s backwards;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 102, 255, 0.1));
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-category:hover::before {
+            left: 100%;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .skill-category h3 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+        }
+
+        .timeline-item h3 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-meta {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .timeline-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .timeline-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-item li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .timeline-item li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(10, 14, 39, 0.6);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.2);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-card h3 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-badge {
+            background: rgba(0, 102, 255, 0.2);
+            color: var(--secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid rgba(0, 102, 255, 0.4);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(255, 0, 102, 0.1));
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            border-color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .cert-card h4 {
+            color: var(--secondary);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .cert-card p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-details a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: var(--primary);
+        }
+
+        .contact-cta {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 102, 255, 0.1));
+            border: 2px solid var(--primary);
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .contact-cta h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .contact-cta p {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            background: var(--darker);
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-dim);
+        }
+
+        footer p {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-background"></div>
+    <div class="gradient-overlay"></div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">SIDHARTH.G</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>DATA<br>ANALYST</h1>
+                    <p class="subtitle">Turning Data into Insights</p>
+                    <p>Certified Data Analytics professional specializing in Power BI, SQL, Python, and machine learning. Recently certified in Azure AI Essentials and GitHub Copilot, ready to drive intelligent automation and cloud-native development.</p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                        <a href="#projects" class="btn btn-secondary">View Projects</a>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">12+</span>
+                        <span class="stat-label">Certifications</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Internships</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">14+</span>
+                        <span class="stat-label">Projects</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Technical Arsenal</h2>
+                <p>Comprehensive skill set spanning data analytics, machine learning, and cloud technologies</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category fade-in">
+                    <h3>Data Analytics & Visualization</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Excel</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Matplotlib</span>
+                        <span class="skill-tag">Looker</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3>Machine Learning</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Scikit-learn</span>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">Azure AI</span>
+                        <span class="skill-tag">LangChain</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3>Development & Deployment</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Streamlit</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">Django</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3>System Administration</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Linux (RHCSA)</span>
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">Shell Scripting</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3>AI & Automation</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">GitHub Copilot</span>
+                        <span class="skill-tag">Azure AI</span>
+                        <span class="skill-tag">OpenAI</span>
+                    </div>
+                </div>
+                <div class="skill-category fade-in">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">R</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Experience Journey</h2>
+                <p>Practical experience in data science and analytics across multiple organizations</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <h3>Data Science Intern</h3>
+                    <div class="timeline-meta">
+                        <span>📍 Hexasoftware, Chennai</span>
+                        <span>📅 June 2025 – July 2025</span>
+                    </div>
+                    <ul>
+                        <li>Developed and maintained 5+ interactive dashboards and reports using Power BI to track key business metrics for different departments</li>
+                        <li>Wrote complex SQL queries to extract, transform, and load (ETL) data from company databases into Power BI for visualization</li>
+                        <li>Cleaned and modeled data within Power BI using Power Query and DAX to create accurate and insightful visuals for the management team</li>
+                    </ul>
+                </div>
+                <div class="timeline-item fade-in">
+                    <h3>Data Science Intern</h3>
+                    <div class="timeline-meta">
+                        <span>📍 Vcodez Technologies, Chennai</span>
+                        <span>📅 January 2025 – March 2025</span>
+                    </div>
+                    <ul>
+                        <li>Developed and trained machine learning models using Python and Scikit-learn to analyze datasets and identify predictive patterns</li>
+                        <li>Extracted, cleaned, and pre-processed complex datasets using Python (Pandas) and SQL to ensure data quality for ML model training</li>
+                        <li>Assisted the senior data team by performing statistical analysis and feature engineering on raw data</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Featured Projects</h2>
+                <p>Real-world data analytics and machine learning projects</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>☁️ Azure AI Analytics Platform</h3>
+                        <p>Deployed a scalable data analytics platform on Azure Cloud Infrastructure utilizing Azure AI services for automated insights generation. Integrated Azure Machine Learning, Cognitive Services, and serverless Azure Functions for intelligent data processing and real-time analytics.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Azure AI</span>
+                            <span class="tech-badge">Azure ML</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Docker</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>🐳 Dockerized ML Pipeline</h3>
+                        <p>Built and containerized a complete machine learning pipeline using Docker for consistent deployment across environments. Implemented CI/CD workflows with automated testing, model training, and deployment to cloud infrastructure with orchestration capabilities.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Docker</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">FastAPI</span>
+                            <span class="tech-badge">Git</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>📊 YouTube Data Dashboard</h3>
+                        <p>Built an interactive YouTube data analytics dashboard using Streamlit for real-time data visualization and insights. Implemented data extraction, processing, and visualization pipelines to analyze channel performance, engagement metrics, and content trends.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Streamlit</span>
+                            <span class="tech-badge">Pandas</span>
+                            <span class="tech-badge">YouTube API</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>🚢 Titanic Survival Prediction</h3>
+                        <p>Developed a machine learning model to predict Titanic passenger survival with high accuracy. Performed comprehensive data preprocessing, exploratory analysis, feature engineering, and applied multiple classification algorithms.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Scikit-learn</span>
+                            <span class="tech-badge">Pandas</span>
+                            <span class="tech-badge">Jupyter</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>💰 Loan Eligibility Prediction</h3>
+                        <p>Created advanced machine learning models predicting loan approvals using LightGBM, CatBoost, and Optuna with hill-climbing optimization. Implemented sophisticated feature engineering and hyperparameter tuning.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">LightGBM</span>
+                            <span class="tech-badge">CatBoost</span>
+                            <span class="tech-badge">Optuna</span>
+                            <span class="tech-badge">Python</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>🦠 COVID-19 Data Analysis</h3>
+                        <p>Analyzed COVID-19 data using Python libraries like Pandas, NumPy, and Matplotlib. Focused on data cleaning, manipulation, and visualization to identify trends, patterns, and correlations in pandemic data.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Pandas</span>
+                            <span class="tech-badge">NumPy</span>
+                            <span class="tech-badge">Matplotlib</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>🌌 NASA NEO Analysis</h3>
+                        <p>Developed an analytical system for NASA's Near-Earth Object data. Performed statistical analysis and data visualization to study asteroid patterns, orbital characteristics, and potential threat assessment.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Data Analysis</span>
+                            <span class="tech-badge">Visualization</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>🥗 Nutrition Project</h3>
+                        <p>Built a comprehensive nutrition analysis application for tracking and analyzing dietary data. Implemented data processing pipelines for nutritional information and meal planning with interactive visualizations.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Data Processing</span>
+                            <span class="tech-badge">Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>🏠 Housing Price Prediction</h3>
+                        <p>Implemented simple linear regression model for housing price prediction. Performed statistical analysis, data preprocessing, and model evaluation to predict real estate prices.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Linear Regression</span>
+                            <span class="tech-badge">Scikit-learn</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>🔍 Exploratory Data Analysis</h3>
+                        <p>Conducted comprehensive EDA on public datasets to uncover insights, patterns, and relationships. Utilized statistical techniques and visualization tools to understand data distributions.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">EDA</span>
+                            <span class="tech-badge">Seaborn</span>
+                            <span class="tech-badge">Jupyter</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-content">
+                        <h3>🌸 Iris Classification</h3>
+                        <p>Classic machine learning classification project on the Iris dataset. Implemented multiple classification algorithms and performed model comparison to achieve optimal species prediction.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Classification</span>
+                            <span class="tech-badge">Scikit-learn</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://github.com/sidharth1606" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <span>💻</span> Explore All Projects on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Certifications</h2>
+                <p>Continuous learning and professional development</p>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-card fade-in">
+                    <h4>Data Analytics Job Simulation</h4>
+                    <p>Deloitte Australia via Forage • Jan 2026</p>
+                </div>
+                <div class="cert-card fade-in">
+                    <h4>Oracle Cloud Infrastructure Generative AI Professional</h4>
+                    <p>LinkedIn • Dec 2025</p>
+                </div>
+                <div class="cert-card fade-in">
+                    <h4>Learning Selenium: Automated Tests</h4>
+                    <p>LinkedIn • Dec 2025</p>
+                </div>
+                <div class="cert-card fade-in">
+                    <h4>Docker Foundations Professional Certificate</h4>
+                    <p>Docker, Inc • Nov 2025</p>
+                </div>
+                <div class="cert-card fade-in">
+                    <h4>AI Pair Programming with GitHub Copilot</h4>
+                    <p>LinkedIn • Nov 2025</p>
+                </div>
+                <div class="cert-card fade-in">
+                    <h4>Microsoft Azure AI Essentials</h4>
+                    <p>Microsoft & LinkedIn • Nov 2025</p>
+                </div>
+                <div class="cert-card fade-in">
+                    <h4>Advanced R Programming for Data Analytics</h4>
+                    <p>NPTEL • Feb 2025</p>
+                </div>
+                <div class="cert-card fade-in">
+                    <h4>Information Security Education</h4>
+                    <p>Ministry of Electronics & IT • Jan 2025</p>
+                </div>
+                <div class="cert-card fade-in">
+                    <h4>Joy of Computing using Python</h4>
+                    <p>NPTEL • Aug 2024</p>
+                </div>
+                <div class="cert-card fade-in">
+                    <h4>Learning Data Analytics: Foundations</h4>
+                    <p>LinkedIn • Mar 2024</p>
+                </div>
+                <div class="cert-card fade-in">
+                    <h4>Red Hat Certified System Administrator</h4>
+                    <p>Red Hat • Aug 2023</p>
+                </div>
+                <div class="cert-card fade-in">
+                    <h4>UNXT Soft Skills Program</h4>
+                    <p>SGBS UNNATI Foundation • Jan 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Let's Connect</h2>
+                <p>Open to freelance, remote, and cloud-based opportunities</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <a href="mailto:sid16sidharth@gmail.com">sid16sidharth@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <a href="tel:7904607087">+91 7904607087</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">💻</div>
+                        <div class="contact-details">
+                            <h4>GitHub</h4>
+                            <a href="https://github.com/sidharth1606" target="_blank">github.com/sidharth1606</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-cta fade-in">
+                    <h3>Ready to Collaborate?</h3>
+                    <p>I'm currently available for data analytics projects, machine learning implementations, and cloud-based solutions. Let's transform your data into actionable insights.</p>
+                    <a href="mailto:sid16sidharth@gmail.com" class="btn btn-primary">Send Message</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Sidharth Ganapathi. Data Analyst | Built with passion for data-driven solutions</p>
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
